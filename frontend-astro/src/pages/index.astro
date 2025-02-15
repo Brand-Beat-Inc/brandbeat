@@ -1,11 +1,25 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/index/Hero/Hero.astro';
+import FeaturedIn from '../components/index/FeaturedIn/FeaturedIn.astro';
+import WhyChooseBrandbeat from '../components/index/WhyChooseBrandbeat/WhyChooseBrandbeat.astro';
+import Carousel from '../components/index/Carousel/Carousel.astro';
+import Testimonial from '../components/index/Testimonial/Testimonial.astro';
+import FeaturedBlogs from '../components/index/FeaturedBlogs/FeaturedBlogs.astro';
+import FAQ from '../components/index/FAQ/FAQ.astro';
+import GetAFreeQuote from '../components/index/GetAFreeQuote/GetAFreeQuote.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<Hero />
+	<div class="page_content">
+		<FeaturedIn />
+		<WhyChooseBrandbeat />
+		<Carousel />
+		<Testimonial />
+		<FeaturedBlogs />
+		<FAQ />
+		<GetAFreeQuote />
+	</div>
 </Layout>

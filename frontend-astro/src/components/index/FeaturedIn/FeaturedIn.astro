@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+
+// Featured In Images
+import Featured1 from './images/1.avif'
+import Featured2 from './images/2.avif'
+import Featured3 from './images/3.avif'
+import Featured4 from './images/4.avif'
+import Featured6 from './images/6.avif'
+import Featured7 from './images/7.avif'
+import Featured8 from './images/8.avif'
+import Featured9 from './images/9.avif'
+import Featured10 from './images/10.avif'
+import Featured11 from './images/11.avif'
+import Featured12 from './images/12.avif'
+
+const logos = [
+  Featured1, Featured2, Featured3, Featured4, Featured6,
+  Featured7, Featured8, Featured9, Featured10, Featured11, Featured12
+];
+---
+
+<div class="w-embed">
+    <style>
+        .frosted_block_parent {
+          backdrop-filter: blur(2em);
+          -webkit-backdrop-filter: blur(2em);
+        }
+      </style>
+    <style>
+        .horizontal {
+          writing-mode: vertical-rl;
+        }
+      </style>
+  </div>
+  <div data-w-id="8171afe5-9e21-3d12-f22c-3fca53266aad" class="anchor_nav">
+    <section id="feature" class="home_feature padding_100_tb">
+      <div class="section_title">Featured In</div>
+      <div class="slider-container">
+        <div class="slider-track">
+          <!-- First set of logos -->
+          {logos.map((logo, idx) => (
+            <div class="slide">
+              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" />
+            </div>
+          ))}
+          <!-- Second set of logos (exact duplicate) -->
+          {logos.map((logo, idx) => (
+            <div class="slide">
+              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <style>
+  .home_feature {
+    overflow: hidden;
+  }
+
+  .slider-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  .slider-track {
+    display: flex;
+    width: fit-content;
+    animation: slide 20s linear infinite;
+  }
+
+  .slide {
+    width: 170px; /* Fixed width for predictable calculations */
+    padding: 0 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      /* Move exactly one set length (11 slides × 170px per slide) */
+      transform: translateX(calc(-170px * 11));
+    }
+  }
+
+  /* Pause animation on hover */
+  .slider-track:hover {
+    animation-play-state: paused;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 768px) {
+    .slide {
+      width: 120px;
+      padding: 0 5px;
+    }
+
+    @keyframes slide {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-120px * 11));
+      }
+    }
+  }
+  </style>
+  </style>

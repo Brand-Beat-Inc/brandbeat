@@ -1,0 +1,93 @@
+---
+import { Image } from 'astro:assets';
+
+import LeftBlur from './images/left_blur.avif'
+import RightBlur from './images/right_blur.avif'
+import CocktailGlass from './images/cocktail_glass.avif'
+import GoldRebrandLogo from './images/gold_rebrand.avif'
+import GoldWebDevLogo from './images/gold_web_dev.avif'
+import GoldSeoLogo from './images/gold_seo.avif'
+import GoldEmailMarketingLogo from './images/gold_email_marketing.avif'
+import GoldPaidAdCampaignsLogo from './images/gold_paid_ads.avif'
+import GoldSocialMediaContentCreationManagementLogo from './images/gold_social_media_content.avif'
+---
+
+
+<section id="about" class="home_about"><Image width="424" src={LeftBlur} alt="" class="left_blur">
+    <div class="container_flex zindex_2">
+      <div class="title_wrap">
+        <h2 class="content_h2 content_h2_center">Why Choose <span class="h2_span highlight">Brand Beat?</span></h2>
+        <p class="center_paragraph">We’ve got you covered with everything from rebranding to digital marketing—all under one roof. What makes us different? We’re all about <em>you</em>. Your vision is our priority, and we’ll work side by side with you to make sure your goals become reality. Let’s do this together!</p>
+      </div>
+      <div class="feature_wrap reverse_wrap">
+        <div class="feature_column_content no_padding_r">
+          <div class="content_block">
+            <div class="overline">at Brand beat</div>
+            <h2 class="content_h2_2">We specialize in delivering tailored solutions designed to meet your unique business needs.</h2>
+            <p class="paragraph left_align">Our team is packed with pros who’ve been around the block and know how to deliver—big time. We’re all about innovation, excellence, and making your digital presence pop. Bottom line? We’re here to get results, grow your brand, and help you stand out in a crowded market.<br><br>Choose Brand Beat and let’s transform your brand together!</p>
+            <div class="hero_button_container">
+              <a href="contact-us.html" class="button-2 w-button">Get In Touch</a>
+              <a href="about.html" class="button-2 outline second w-button">Learn More About Us</a>
+            </div>
+          </div>
+        </div>
+        <div class="feature_column_image">
+          <div class="feature_image_div"><Image width="3570" height="5355" alt="" src={CocktailGlass} style="color:#d9d9d9;background-color:#d9d9d9" class="feature_image unsplash-image"></div>
+        </div>
+      </div>
+    </div><Image width="424" src={RightBlur} alt="" class="right_blur">
+  </section>
+  <section id="services" class="home_services">
+    <div class="container_flex left_align">
+      <div class="title_wrap vflex">
+        <div class="section-tag_container overline no_padding">
+          <div>Our Service</div>
+          <div class="section-tag_line"></div>
+        </div>
+        <div class="hflex align_center-spa is--grid">
+          <h2 class="content_h2 width-75 height-45">We&#x27;ll help <span class="h2_span highlight">digitally</span> <br>transform your business.</h2>
+          <a href="services.html" class="button_cta outline in--grid w-button">Learn More</a>
+          <div id="w-node-bd56b2ca-d3f7-56fe-53fa-bb6311dc57ed-b9f50cfb" class="section-descrption_container no_padding-l mobile-no-margin">
+            <p class="subheadline">Explore our full suite of digital marketing services designed to elevate your brand and grow your online presence.</p>
+          </div>
+        </div>
+      </div>
+      <div class="services_grid">
+        <a href="/services/rebranding" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldRebrandLogo}></div>
+          <div class="service_title">Rebranding</div>
+          <p class="service_paragraph">Before anything else, we refine your branding to mirror the quality of your offerings. Expect a cohesive brand identity with a refined logo, and visual assets that resonate with your audience</p>
+        </a>
+        <a href="/services/web-design-development" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldWebDevLogo}></div>
+          <div class="service_title">Web Design &amp; Development</div>
+          <p class="service_paragraph">Create stunning, user-friendly websites that reflect your brand and drive conversions. Our custom designs ensure a seamless experience across all devices.</p>
+        </a>
+        <a href="/services/seo-services" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldSeoLogo}></div>
+          <div class="service_title">sEO</div>
+          <p class="service_paragraph">Boost your online visibility with our tailored SEO strategies. We optimize your website to rank higher on search engines, attracting more organic traffic and potential customers.</p>
+        </a>
+        <a href="/services/email-marketing" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldEmailMarketingLogo}></div>
+          <div class="service_title">email marketing</div>
+          <p class="service_paragraph">Engage your audience with personalized email campaigns that drive action. Our targeted approach increases open rates and fosters long-term customer relationships.</p>
+        </a>
+        <a href="/services/paid-ad-campaigns" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldPaidAdCampaignsLogo}></div>
+          <div class="service_title">paid ads</div>
+          <p class="service_paragraph">Maximize your reach and ROI with data-driven paid advertising campaigns. We target your ideal audience to ensure your ads generate meaningful results.</p>
+        </a>
+        <a id="w-node-_94a30066-6d26-3f1f-88d7-1dfdf89c81de-b9f50cfb" href="/services/social-media-content-creation-management" class="services_grid_block w-inline-block">
+          <div class="icon_container"><Image height="60" width="60" alt="" src={GoldSocialMediaContentCreationManagementLogo}></div>
+          <div class="service_title">Social Media Content Creation &amp; Management</div>
+          <p class="service_paragraph">Build your brand’s online presence with engaging social media content. Our management services keep your profiles active and foster community engagement.</p>
+        </a>
+        <div id="w-node-_94a30066-6d26-3f1f-88d7-1dfdf89c81e5-b9f50cfb" class="services_grid_block end_block">
+          <div class="service_title service_title_center">See how we can help you</div>
+          <a href="contact-us.html" class="button_cta w-button">Get Started</a>
+          <p class="tag-10">Request A Free Marketing Audit</p>
+        </div>
+      </div>
+    </div>
+  </section>

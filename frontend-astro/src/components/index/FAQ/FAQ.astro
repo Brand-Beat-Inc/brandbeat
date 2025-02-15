@@ -1,0 +1,83 @@
+---
+const faqs = [
+  {
+    question: "How long does it take to create a brand identity?",
+    answer:
+      "The timeframe varies based on the scope and complexity of the project. On average, it takes 4 to 8 weeks to complete a comprehensive brand identity project."
+  },
+  {
+    question: "What is brand identity, and how is it different from branding?",
+    answer:
+      "Brand identity is the collection of visual and verbal elements that represent your brand, such as the logo, color scheme, and messaging. Branding, on the other hand, is the process of creating and managing a brand identity."
+  },
+  {
+    question: "Can I update my existing brand identity instead of creating a new one?",
+    answer:
+      "Absolutely. We offer brand refresh services to modernize and refine your existing brand identity while retaining its core elements."
+  },
+];
+---
+
+<section class="home_faqs is--black">
+    <div class="container_flex">
+        <div
+            class="title_wrap vflex margin-bottom max-width margin-bottom-4rem"
+            style="transform: translate3d(0px, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d; opacity: 1;"
+        >
+            <div class="vflex align_center-spa no-padding">
+                <div class="section-tag_container overline margin-bottom">
+                    <div class="section-tag_line reverse right-margin">
+                    </div><div>FAQs</div><div class="section-tag_line"></div>
+                </div><div class="vflex_inner">
+                    <h2 class="content_h2 width-100 align_left white">
+                        Frequently
+                    </h2>
+                    <h2 class="content_h2 width-100 align_left h2_span highlight is--orange">
+                        Asked Questions
+                    </h2>
+                </div><div class="section-descrption_container text_center">
+                </div>
+            </div>
+        </div><div class="width-100 w-dyn-list">
+            <div role="list" class="w-dyn-items">
+                <div role="listitem" class="w-dyn-item">
+                    <div class="faq_list">
+                        {faqs.map((faq) => (
+                            <details class="faq_accordion transparent restyle">
+                                <summary class="faq_heading">
+                                    <div class="heading-style-h4 is--white" style="color: rgb(255, 255, 255);">
+                                        {faq.question}
+                                    </div>
+                                    <div class="faq_icon">
+                                        <div class="icon-32 w-embed">
+                                            <svg
+                                                width="32"
+                                                height="32"
+                                                viewBox="0 0 32 32"
+                                                fill="none"
+                                                xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                                <path
+                                                    d="M10 6 L22 16 L10 26"
+                                                    stroke="#607080"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                ></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </summary>
+                                <div class="faq_body">
+                                    <div class="faq_answers">
+                                        <p class="text-color-gray is--white">{faq.answer}</p>
+                                    </div>
+                                </div>
+                            </details>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

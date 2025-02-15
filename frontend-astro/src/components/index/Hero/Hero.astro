@@ -1,0 +1,86 @@
+---
+import { Image } from 'astro:assets';
+
+import ArrowChevronDown from './images/arrow-chevron-down.svg'
+import HeroBG from './images/hero_bg.avif'
+
+// Featured In Images
+import Featured1 from './images/featured/1.avif'
+import Featured2 from './images/featured/2.avif'
+import Featured3 from './images/featured/3.avif'
+import Featured4 from './images/featured/4.avif'
+import Featured6 from './images/featured/6.avif'
+import Featured7 from './images/featured/7.avif'
+import Featured8 from './images/featured/8.avif'
+import Featured9 from './images/featured/9.avif'
+import Featured10 from './images/featured/10.avif'
+import Featured11 from './images/featured/11.avif'
+import Featured12 from './images/featured/12.avif'
+
+import Navbar from '../../layout/Navbar.astro'
+---
+
+<section data-w-id="bba04e59-5ca6-4e1a-662b-e403e6b3bf66" class="home_hero">
+    <Navbar />
+    <div class="container_h-flex_center black_overlay feature_hiden">
+      <h5 class="hero_overline">Unleash your Brand&#x27;s Potential.</h5>
+      <h1 class="hero_h1">Elevate Your Brand with Award Winning Rebranding and Digital Solutions</h1>
+      <p class="hero_paragraph">From strategy to execution, we empower your brand to stand out, engage your audience, and drive lasting growth. We offer you full-services specializing in rebranding, web development, SEO, and more. Let us help you thrive online!</p>
+      <div class="hero_button_container">
+        <a href="https://calendly.com/brandbeat/marketingaudit?background_color=fcfaf7&amp;primary_color=ed4b00" target="_blank" class="button_main w-button">Request a Free Marketing Audit</a>
+        <a href="services.html" class="button_main outline w-button">Browse Services</a>
+      </div>
+      <div class="home_feature padding_100_tb is--in_hero display-none">
+        <div class="section_title is--white">Featured In</div>
+        <div class="logos-container top_padding">
+          <div class="logos-row"><Image width="150" loading="eager" alt="" src={Featured3} class="logo"><Image width="120" loading="eager" alt="" src={Featured1} class="logo"><Image width="150" loading="eager" alt="" src={Featured2} class="logo"><Image width="120" loading="eager" alt="" src={Featured10} class="logo"><Image width="80" loading="eager" alt="" src={Featured6} class="logo"><Image width="150" loading="eager" alt="" src={Featured12} class="logo"><Image width="150" loading="eager" alt="" src={Featured11} class="logo"><Image width="80" loading="eager" alt="" src={Featured4} class="logo"><Image width="150" loading="eager" alt="" src={Featured7} class="logo"><Image width="150" loading="eager" alt="" src={Featured8} class="logo"><Image width="150" loading="eager" alt="" src={Featured9} class="logo"></div>
+          <div class="logos-row"><Image width="150" loading="eager" alt="" src={Featured3} class="logo"><Image width="120" loading="eager" alt="" src={Featured1} class="logo"><Image width="150" loading="eager" alt="" src={Featured2} class="logo"><Image width="120" loading="eager" alt="" src={Featured10} class="logo"><Image width="80" loading="eager" alt="" src={Featured6} class="logo"><Image width="150" loading="eager" alt="" src={Featured12} class="logo"><Image width="150" loading="eager" alt="" src={Featured11} class="logo"><Image width="80" loading="eager" alt="" src={Featured4} class="logo"><Image width="150" loading="eager" alt="" src={Featured7} class="logo"><Image width="150" loading="eager" alt="" src={Featured8} class="logo"><Image width="150" loading="eager" alt="" src={Featured9} class="logo"></div>
+          <div class="logos-row"><Image width="150" loading="eager" alt="" src={Featured3} class="logo"><Image width="120" loading="eager" alt="" src={Featured1} class="logo"><Image width="150" loading="eager" alt="" src={Featured2} class="logo"><Image width="120" loading="eager" alt="" src={Featured10} class="logo"><Image width="80" loading="eager" alt="" src={Featured6} class="logo"><Image width="150" loading="eager" alt="" src={Featured12} class="logo"><Image width="150" loading="eager" alt="" src={Featured11} class="logo"><Image width="80" loading="eager" alt="" src={Featured4} class="logo"><Image width="150" loading="eager" alt="" src={Featured7} class="logo"><Image width="150" loading="eager" alt="" src={Featured8} class="logo"><Image width="150" loading="eager" alt="" src={Featured9} class="logo"></div>
+          <div class="w-embed">
+            <style>
+                @keyframes scroll {
+                  from {
+                    transform: translateX(0);
+                  }
+                  to {
+                    transform: translateX(-100%);
+                  }
+                }
+                .logos-row {
+                  animation: scroll 20s linear infinite;
+                }
+                .logos-container:hover .logos-row {
+                  animation-play-state: paused;
+                }
+              </style>
+          </div>
+          <div class="logos-gradient is-inverted orange"></div>
+          <div class="logos-gradient blue"></div>
+        </div>
+      </div>
+      <div class="bounce_wrapper">
+        <a href="#feature" class="anchor_scroll w-inline-block">
+          <!-- Removed inline style. The bounce animation is now applied via the bounce_icon class -->
+          <Image width="50" alt="" src={ArrowChevronDown} loading="lazy" class="bounce_icon">
+        </a>
+      </div>
+    </div>
+    <div id="w-node-bba04e59-5ca6-4e1a-662b-e403e6b3bfb4-b9f50cfb" data-w-id="bba04e59-5ca6-4e1a-662b-e403e6b3bfb4" class="parallax_trigger"><Image width="960" data-w-id="bba04e59-5ca6-4e1a-662b-e403e6b3bfb5" alt="" src={HeroBG} loading="lazy" class="parallax_background"></div>
+  </section>
+</section>
+
+<style>
+  .bounce_icon {
+    animation: bounce 2s infinite ease-in-out;
+    display: inline-block;
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+</style>

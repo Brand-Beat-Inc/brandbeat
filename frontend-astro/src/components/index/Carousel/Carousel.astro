@@ -1,0 +1,143 @@
+---
+import { Image } from 'astro:assets';
+
+import Braystone from './images/braystone.avif'
+import Objekta from './images/objekta.avif'
+import Jade from './images/jade.avif'
+import WilsonMortgage from './images/wilson_mortgage.avif'
+---
+
+<section id="case-studies" class="featured_projects-carousel">
+  <div class="title_wrap vflex margin-bottom">
+    <div class="vflex align_center-spa">
+      <div class="section-tag_container overline margin-bottom">
+        <div class="section-tag_line reverse"></div>
+        <div>Our Success Stories</div>
+        <div class="section-tag_line"></div>
+      </div>
+      <h2 class="content_h2 width-100">Our Work <span class="h2_span highlight">Speaks for Itself</span> <br></h2>
+      <div class="section-descrption_container text_center">
+        <p class="paragraph less-bottom-margin">Explore our portfolio of successful rebrands and innovative websites that drive growth, engagement, and lasting impressions.</p>
+      </div>
+    </div>
+  </div>
+  <div class="projects_wrapper">
+    <div class="section-gradient_bottom"></div>
+    <div class="explore-button_wrapper"></div>
+    <div class="slider-container">
+      <div class="slider">
+        <div class="slide-track">
+          <!-- Original slides -->
+          <div class="slide">
+            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" />
+          </div>
+          <!-- Duplicate slides for infinite effect -->
+          <div class="slide">
+            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" />
+          </div>
+          <div class="slide">
+            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .slider-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+  }
+
+  .slider {
+    position: relative;
+    width: 100%;
+  }
+
+  .slide-track {
+    display: flex;
+    width: calc(310px * 8); /* 8 slides: 4 originals + 4 duplicates */
+    animation: scroll 10s linear infinite;
+    will-change: transform;
+  }
+
+  .slide {
+    width: 620px;
+    flex-shrink: 0;
+    padding: 0 2px;
+  }
+
+  .project-carousel-image {
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    object-fit: cover;
+  }
+
+  .slide:hover .project-carousel-image {
+    transform: scale(1.05);
+  }
+
+  @keyframes scroll {
+    0% { 
+      transform: translate3d(0, 0, 0);
+    }
+    100% { 
+      transform: translate3d(-2480px, 0, 0); /* Move exactly by the width of 4 slides */
+    }
+  }
+
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .slide {
+      width: 320px;
+    }
+    .slide-track {
+      width: calc(320px * 8);
+    }
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  }
+
+  /* Optional: Add a fade effect at the edges */
+  .slider::before,
+  .slider::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .slider::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,1), rgba(255,255,255,0));
+  }
+
+  .slider::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,1), rgba(255,255,255,0));
+  }
+</style>

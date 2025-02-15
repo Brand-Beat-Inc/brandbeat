@@ -7,6 +7,9 @@ Inside of your Astro project, you'll see the following folders and files:
 ├── public/
 │   └── favicon.svg
 ├── src/
+│   ├── components/
+│   │   ├── index/
+│   │   │   └── Hero.astro
 │   ├── layouts/
 │   │   └── Layout.astro
 │   └── pages/
