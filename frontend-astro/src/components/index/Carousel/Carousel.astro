@@ -29,29 +29,29 @@ import WilsonMortgage from './images/wilson_mortgage.avif'
         <div class="slide-track">
           <!-- Original slides -->
           <div class="slide">
-            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <!-- Duplicate slides for infinite effect -->
           <div class="slide">
-            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Braystone project" src={Braystone} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Objekta project" src={Objekta} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Jade project" src={Jade} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
           <div class="slide">
-            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" />
+            <Image width="620" height="410" alt="Wilson Mortgage project" src={WilsonMortgage} loading="eager" class="project-carousel-image" draggable="false" />
           </div>
         </div>
       </div>
@@ -90,6 +90,8 @@ import WilsonMortgage from './images/wilson_mortgage.avif'
     border-radius: 8px;
     transition: transform 0.3s ease;
     object-fit: cover;
+    user-select: none; /* Prevents text selection */
+    -webkit-user-drag: none; /* Additional protection against dragging for Safari */
   }
 
   .slide:hover .project-carousel-image {

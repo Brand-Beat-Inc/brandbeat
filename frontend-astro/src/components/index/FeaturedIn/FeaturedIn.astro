@@ -41,13 +41,13 @@ const logos = [
           <!-- First set of logos -->
           {logos.map((logo, idx) => (
             <div class="slide">
-              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" />
+              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" draggable="false" />
             </div>
           ))}
           <!-- Second set of logos (exact duplicate) -->
           {logos.map((logo, idx) => (
             <div class="slide">
-              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" />
+              <Image src={logo} alt={`Featured logo ${idx + 1}`} width="150" height="85" loading="eager" class="logo" draggable="false" />
             </div>
           ))}
         </div>
