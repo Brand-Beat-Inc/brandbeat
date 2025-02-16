@@ -1,0 +1,173 @@
+{
+  "kind": "collectionType",
+  "collectionName": "services",
+  "info": {
+    "singularName": "service",
+    "pluralName": "services",
+    "displayName": "Services",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Slug": {
+      "type": "string"
+    },
+    "Meta_Title": {
+      "type": "string"
+    },
+    "Meta_Description": {
+      "type": "text"
+    },
+    "Is_Core_Service": {
+      "type": "boolean"
+    },
+    "Service_Image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "CTA_Text": {
+      "type": "string"
+    },
+    "Headline": {
+      "type": "text"
+    },
+    "Card_Heading": {
+      "type": "text"
+    },
+    "Card_Description": {
+      "type": "text"
+    },
+    "Introduction_Section": {
+      "type": "blocks"
+    },
+    "Icon": {
+      "type": "blocks"
+    },
+    "USP_Heading": {
+      "type": "string"
+    },
+    "USP_Section": {
+      "type": "string"
+    },
+    "USP_Title_1": {
+      "type": "string"
+    },
+    "USP_Content_1": {
+      "type": "text"
+    },
+    "USP_Image_1": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "USP_Title_2": {
+      "type": "string"
+    },
+    "USP_Content_2": {
+      "type": "text"
+    },
+    "USP_Image_2": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "USP_Title_3": {
+      "type": "string"
+    },
+    "USP_Content_3": {
+      "type": "text"
+    },
+    "USP_Image_3": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "USP_Title_4": {
+      "type": "string"
+    },
+    "USP_Content_4": {
+      "type": "text"
+    },
+    "USP_Image_4": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "USP_Title_5": {
+      "type": "string"
+    },
+    "USP_Content_5": {
+      "type": "text"
+    },
+    "USP_Image_5": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "Service_Expertise_Heading": {
+      "type": "text"
+    },
+    "Service_Expertise_Section": {
+      "type": "blocks"
+    },
+    "Service_Process_Strategy_Heading": {
+      "type": "text"
+    },
+    "Service_Process_Strategy_Section": {
+      "type": "blocks"
+    },
+    "Comprehensive_Service_Heading": {
+      "type": "string"
+    },
+    "Comprehensive_Service_Section": {
+      "type": "blocks"
+    },
+    "Post_Conclusion": {
+      "type": "blocks"
+    },
+    "FAQs_Section_Heading": {
+      "type": "string"
+    },
+    "FAQs": {
+      "type": "text"
+    }
+  }
+}

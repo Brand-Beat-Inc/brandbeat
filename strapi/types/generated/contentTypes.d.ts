@@ -369,6 +369,84 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiServiceService extends Struct.CollectionTypeSchema {
+  collectionName: 'services';
+  info: {
+    description: '';
+    displayName: 'Services';
+    pluralName: 'services';
+    singularName: 'service';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Card_Description: Schema.Attribute.Text;
+    Card_Heading: Schema.Attribute.Text;
+    Comprehensive_Service_Heading: Schema.Attribute.String;
+    Comprehensive_Service_Section: Schema.Attribute.Blocks;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    CTA_Text: Schema.Attribute.String;
+    FAQs: Schema.Attribute.Text;
+    FAQs_Section_Heading: Schema.Attribute.String;
+    Headline: Schema.Attribute.Text;
+    Icon: Schema.Attribute.Blocks;
+    Introduction_Section: Schema.Attribute.Blocks;
+    Is_Core_Service: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::service.service'
+    > &
+      Schema.Attribute.Private;
+    Meta_Description: Schema.Attribute.Text;
+    Meta_Title: Schema.Attribute.String;
+    Name: Schema.Attribute.String;
+    Post_Conclusion: Schema.Attribute.Blocks;
+    publishedAt: Schema.Attribute.DateTime;
+    Service_Expertise_Heading: Schema.Attribute.Text;
+    Service_Expertise_Section: Schema.Attribute.Blocks;
+    Service_Image: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    Service_Process_Strategy_Heading: Schema.Attribute.Text;
+    Service_Process_Strategy_Section: Schema.Attribute.Blocks;
+    Slug: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    USP_Content_1: Schema.Attribute.Text;
+    USP_Content_2: Schema.Attribute.Text;
+    USP_Content_3: Schema.Attribute.Text;
+    USP_Content_4: Schema.Attribute.Text;
+    USP_Content_5: Schema.Attribute.Text;
+    USP_Heading: Schema.Attribute.String;
+    USP_Image_1: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    USP_Image_2: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    USP_Image_3: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    USP_Image_4: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    USP_Image_5: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    USP_Section: Schema.Attribute.String;
+    USP_Title_1: Schema.Attribute.String;
+    USP_Title_2: Schema.Attribute.String;
+    USP_Title_3: Schema.Attribute.String;
+    USP_Title_4: Schema.Attribute.String;
+    USP_Title_5: Schema.Attribute.String;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -878,6 +956,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::service.service': ApiServiceService;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
