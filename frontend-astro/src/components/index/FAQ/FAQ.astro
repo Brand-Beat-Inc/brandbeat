@@ -38,7 +38,8 @@ const faqs = [
                 </div><div class="section-descrption_container text_center">
                 </div>
             </div>
-        </div><div class="width-100 w-dyn-list">
+        </div>
+        <div class="w-dyn-list" style="width: 100%;">
             <div role="list" class="w-dyn-items">
                 <div role="listitem" class="w-dyn-item">
                     <div class="faq_list">
@@ -81,3 +82,17 @@ const faqs = [
         </div>
     </div>
 </section>
+
+
+<style>
+    .faq_icon {
+      transition: transform 0.3s ease;
+    }
+    details.faq_accordion[open] .faq_icon {
+      transform: rotate(45deg);
+    }
+    .faq_heading:hover .heading-style-h4 {
+      color: var(--kimchi) !important;
+      transition: color 0.3s ease;
+    }
+  </style>
