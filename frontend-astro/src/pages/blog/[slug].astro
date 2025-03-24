@@ -1,0 +1,422 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Add interface for article type
+interface Article {
+  title: string;
+  slug: string;
+  description: string;
+  publishedAt: string;
+  content?: string;
+  cover?: {
+    url: string;
+  };
+  author?: {
+    name?: string;
+  };
+  category?: {
+    name?: string;
+  };
+  blocks?: Array<{
+    __component: string;
+    body?: string;
+    code?: string;
+    author?: string;
+    file?: {
+      url: string;
+      alternativeText?: string;
+    };
+    caption?: string;
+  }>;
+}
+
+// Get the slug from the URL
+export async function getStaticPaths() {
+  const strapiUrl = import.meta.env.VITE_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+  const response = await fetch(`${strapiUrl}/api/articles?populate=*`);
+  const { data } = await response.json();
+  
+  return data.map((article: any) => ({
+    params: { slug: article.slug },
+    props: { article } as { article: Article },
+  }));
+}
+
+// Type the article prop
+const { article } = Astro.props as { article: Article };
+const strapiUrl = import.meta.env.VITE_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+
+// Format date for display
+function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+
+  <article class="article-container">
+    <div class="article-header">
+      <div class="article-meta">
+        <span class="category">{article.category?.name || 'Article'}</span>
+        <span class="date">{formatDate(article.publishedAt)}</span>
+      </div>
+      <h1 class="article-title">{article.title}</h1>
+      <p class="article-description">{article.description}</p>
+      
+      <div class="author-info">
+        <div class="author-avatar">
+          {article.author?.name?.charAt(0) || 'A'}
+        </div>
+        <div class="author-details">
+          <span class="author-name">{article.author?.name || 'Anonymous'}</span>
+          <span class="read-time">5 min read</span>
+        </div>
+      </div>
+    </div>
+    
+    {article?.cover && (
+      <div class="featured-image">
+        <img 
+          src={`${strapiUrl}${article.cover.url}`} 
+          alt={article.title}
+        />
+      </div>
+    )}
+    
+    <div class="article-content">
+      {article.blocks?.map((block: any, index: number) => {
+        if (block.__component === 'shared.rich-text') {
+          return <div class="content-block" set:html={block.body} />;
+        } else if (block.__component === 'shared.media') {
+          return (
+            <div class="media-block">
+              {block.file?.url ? (
+                <img 
+                  src={`${strapiUrl}${block.file.url}`} 
+                  alt={block.file?.alternativeText || 'Article image'} 
+                />
+              ) : (
+                <div class="missing-media">Media file not available</div>
+              )}
+              {block.caption && <p class="caption">{block.caption}</p>}
+            </div>
+          );
+        } else if (block.__component === 'shared.quote') {
+          return (
+            <blockquote class="quote-block">
+              <p>{block.body}</p>
+              {block.author && <cite>— {block.author}</cite>}
+            </blockquote>
+          );
+        } else if (block.__component === 'shared.code') {
+          return (
+            <div class="code-block">
+              <pre><code>{block.code}</code></pre>
+            </div>
+          );
+        } else {
+          return <div>Unsupported block type</div>;
+        }
+      })}
+      
+      {!article.blocks?.length && (
+        <div class="content-block">
+          <p>{article.content || 'No content available for this article.'}</p>
+        </div>
+      )}
+    </div>
+    
+    <div class="article-footer">
+      <div class="share-buttons">
+        <span>Share this article:</span>
+        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(article.title)}&url=${encodeURIComponent(Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="share-button twitter">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg>
+        </a>
+        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`} target="_blank" rel="noopener noreferrer" class="share-button facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+        </a>
+        <a href={`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(Astro.url.href)}&title=${encodeURIComponent(article.title)}`} target="_blank" rel="noopener noreferrer" class="share-button linkedin">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        </a>
+      </div>
+      
+      <div class="back-to-blog">
+        <a href="/blog" class="back-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          Back to all articles
+        </a>
+      </div>
+    </div>
+  </article>
+
+<style>
+  /* Article Container */
+  .article-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  /* Article Header */
+  .article-header {
+    margin-bottom: 2rem;
+  }
+  
+  .article-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  
+  .category {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.25rem 0.75rem;
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-radius: 9999px;
+    margin-right: 1rem;
+  }
+  
+  .date {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  .article-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+  
+  .article-description {
+    font-size: 1.25rem;
+    color: #4b5563;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author-avatar {
+    width: 3rem;
+    height: 3rem;
+    background-color: #dbeafe;
+    color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-right: 0.75rem;
+  }
+  
+  .author-details {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .author-name {
+    font-weight: 600;
+    color: #1f2937;
+  }
+  
+  .read-time {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+  
+  /* Featured Image */
+  .featured-image {
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .featured-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  /* Article Content */
+  .article-content {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    color: #374151;
+  }
+  
+  .content-block {
+    margin-bottom: 2rem;
+  }
+  
+  .content-block h2 {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 2rem 0 1rem;
+  }
+  
+  .content-block h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 1.5rem 0 1rem;
+  }
+  
+  .content-block p {
+    margin-bottom: 1.5rem;
+  }
+  
+  .content-block ul, .content-block ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  
+  .content-block li {
+    margin-bottom: 0.5rem;
+  }
+  
+  .content-block a {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  
+  .content-block a:hover {
+    color: #1d4ed8;
+  }
+  
+  /* Media Block */
+  .media-block {
+    margin: 2rem 0;
+  }
+  
+  .media-block img {
+    width: 100%;
+    border-radius: 0.5rem;
+  }
+  
+  .caption {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  
+  /* Quote Block */
+  .quote-block {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background-color: #f3f4f6;
+    border-left: 4px solid #2563eb;
+    font-style: italic;
+  }
+  
+  .quote-block p {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .quote-block cite {
+    font-size: 1rem;
+    color: #4b5563;
+  }
+  
+  /* Code Block */
+  .code-block {
+    margin: 2rem 0;
+  }
+  
+  .code-block pre {
+    background-color: #1f2937;
+    color: #f9fafb;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+  
+  /* Article Footer */
+  .article-footer {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .share-buttons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .share-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: white;
+    transition: transform 0.2s ease;
+  }
+  
+  .share-button:hover {
+    transform: translateY(-2px);
+  }
+  
+  .twitter {
+    background-color: #1da1f2;
+  }
+  
+  .facebook {
+    background-color: #1877f2;
+  }
+  
+  .linkedin {
+    background-color: #0077b5;
+  }
+  
+  .back-to-blog {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .back-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2563eb;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+  
+  .back-link:hover {
+    color: #1d4ed8;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 640px) {
+    .article-title {
+      font-size: 2rem;
+    }
+    
+    .article-description {
+      font-size: 1.125rem;
+    }
+    
+    .article-content {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,325 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Fetch blog posts from Strapi
+const strapiUrl = import.meta.env.VITE_PUBLIC_STRAPI_URL || 'http://localhost:1337';
+const response = await fetch(`${strapiUrl}/api/articles?populate=*`);
+const { data } = await response.json();
+
+// Format date for display
+function formatDate(dateString: string): string {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout title="Blog | My Project">
+  <div class="blog-container">
+    <div class="blog-header">
+      <h1>Our Blog</h1>
+      <p>Latest insights and articles</p>
+    </div>
+    
+    {data.length === 0 ? (
+      <div class="empty-state">
+        <svg xmlns="http://www.w3.org/2000/svg" class="empty-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+        </svg>
+        <p>No articles found. Check back soon!</p>
+      </div>
+    ) : (
+      <div class="blog-grid">
+        {data.map((article: any) => (
+          <article class="blog-card">
+            {article?.cover ? (
+              <div class="card-image-container">
+                <img 
+                  src={`${strapiUrl}${article?.cover?.url}`} 
+                  alt={article.title}
+                  class="card-image"
+                />
+              </div>
+            ) : (
+              <div class="card-image-placeholder">
+                <svg xmlns="http://www.w3.org/2000/svg" class="placeholder-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                </svg>
+              </div>
+            )}
+            
+            <div class="card-content">
+              <div class="card-body">
+                <div class="card-meta">
+                  <span class="category-tag">
+                    {article.category?.name || 'Article'}
+                  </span>
+                  <span class="publish-date">
+                    {formatDate(article.publishedAt)}
+                  </span>
+                </div>
+                
+                <h2 class="card-title">
+                  <a href={`/blog/${article.slug}`}>
+                    {article.title}
+                  </a>
+                </h2>
+                
+                <p class="card-description">
+                  {article.description || (article.content && article.content.substring(0, 150) + '...')}
+                </p>
+              </div>
+              
+              <div class="card-footer">
+                <div class="author-info">
+                  <div class="author-avatar">
+                    {article.author?.name?.charAt(0) || 'A'}
+                  </div>
+                  <span class="author-name">{article.author?.name || 'Anonymous'}</span>
+                </div>
+                
+                <a href={`/blog/${article.slug}`} class="read-more">
+                  Read More
+                  <svg xmlns="http://www.w3.org/2000/svg" class="arrow-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
+  </div>
+</Layout>
+
+<style>
+  /* Container and Layout */
+  .blog-container {
+    background: linear-gradient(to bottom, #f0f7ff, #ffffff);
+    padding: 4rem 1rem;
+  }
+  
+  .blog-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .blog-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .blog-header p {
+    font-size: 1.25rem;
+    color: #3b82f6;
+  }
+  
+  .blog-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  @media (min-width: 768px) {
+    .blog-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .blog-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Empty State */
+  .empty-state {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 3rem;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .empty-icon {
+    width: 4rem;
+    height: 4rem;
+    color: #9ca3af;
+    margin-bottom: 1rem;
+    margin: 0 auto 1rem;
+  }
+  
+  .empty-state p {
+    font-size: 1.25rem;
+    color: #4b5563;
+  }
+  
+  /* Blog Card */
+  .blog-card {
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Card Image */
+  .card-image-container {
+    height: 13rem;
+    overflow: hidden;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .card-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-image-placeholder {
+    height: 13rem;
+    background: linear-gradient(to right, #dbeafe, #e0e7ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .placeholder-icon {
+    width: 4rem;
+    height: 4rem;
+    color: #60a5fa;
+  }
+  
+  /* Card Content */
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .card-body {
+    flex-grow: 1;
+  }
+  
+  .card-meta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  
+  .category-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    background-color: #dbeafe;
+    color: #1e40af;
+    border-radius: 9999px;
+  }
+  
+  .publish-date {
+    font-size: 0.75rem;
+    color: #6b7280;
+    margin-left: 0.5rem;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s ease;
+  }
+  
+  .card-title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  
+  .card-title a:hover {
+    color: #2563eb;
+    text-decoration: underline;
+  }
+  
+  .card-description {
+    color: #4b5563;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  /* Card Footer */
+  .card-footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .author-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .author-avatar {
+    width: 2rem;
+    height: 2rem;
+    background-color: #dbeafe;
+    color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+  }
+  
+  .author-name {
+    font-size: 0.875rem;
+    color: #4b5563;
+    margin-left: 0.5rem;
+  }
+  
+  .read-more {
+    color: #2563eb;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  
+  .read-more:hover {
+    color: #1d4ed8;
+  }
+  
+  .arrow-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-left: 0.25rem;
+  }
+</style>
